@@ -30,7 +30,6 @@ public class UserController {
 	public String join(
 			@ModelAttribute UserVo userVo
 			){
-		
 		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
