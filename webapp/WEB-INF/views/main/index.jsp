@@ -15,18 +15,20 @@
 		 <c:if test="${not empty authUser }">
 	      <h2>${authUser.name } 님 안녕하세요</h2>
 	      </c:if>
-		
-		
 			<ul class="menu">
-
+			 	<c:if test="${empty authUser }">
 					<li><a href="${pageContext.request.contextPath }/user/loginform">로그인</a></li>
+				</c:if>
+				<c:if test="${empty authUser }">
 					<li><a href="${pageContext.request.contextPath }/user/joinform">회원가입</a></li>
+				</c:if>
+				<c:if test="${not empty authUser }">
 					<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
+				</c:if>
+				<c:if test="${not empty authUser }">
 					<li><a href="${pageContext.request.contextPath }">내블로그</a></li>
-				
-	
-			
-		</ul>
+				</c:if>
+			</ul>
 		<form class="search-form">
 			<fieldset>
 				<input type="text" name="keyword" />

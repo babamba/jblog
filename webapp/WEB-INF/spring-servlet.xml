@@ -21,8 +21,7 @@
 					</list>
 				</property>
 			</bean>
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>application/json; charset=UTF-8</value>
@@ -30,6 +29,12 @@
 				</property>
 			</bean>
 		</mvc:message-converters>
+		
+		<!-- argument resolver -->
+		<mvc:argument-resolvers>
+			<bean class="com.bit2016.jblog.security.AuthUserHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+		
 	</mvc:annotation-driven>
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
@@ -47,7 +52,6 @@
 			<mvc:mapping path="/user/logout" />
 			<bean class="com.bit2016.jblog.security.AuthLogoutInterceptor" />
 		</mvc:interceptor>
-
 
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
