@@ -12,11 +12,20 @@
 <body>
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
-		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
+		 <c:if test="${not empty authUser }">
+	      <h2>${authUser.name } 님 안녕하세요</h2>
+	      </c:if>
+		
+		
+			<ul class="menu">
+
+					<li><a href="${pageContext.request.contextPath }/user/loginform">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath }/user/joinform">회원가입</a></li>
+					<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath }">내블로그</a></li>
+				
+	
+			
 		</ul>
 		<form class="search-form">
 			<fieldset>
