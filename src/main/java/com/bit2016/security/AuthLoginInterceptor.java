@@ -1,4 +1,4 @@
-package com.bit2016.jblog.security;
+package com.bit2016.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,39 +14,35 @@ import com.bit2016.jblog.vo.UserVo;
 public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
-	public boolean preHandle(
-			HttpServletRequest request,
-			HttpServletResponse response, 
-			Object handler) 
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler /*HandlerMethod*/)
 			throws Exception {
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
+		//Web Application context 받아오기
 		ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
 		
-		//컨테이너 userService객체 집어넣기
-		UserService userService = ac.getBean(UserService.class);
+		//Container 안에 있는 UserService Bean(객체) 받아오기 
+		UserService userService = ac.getBean(UserService.class); // 클래스 자체로 가져오기
 		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@" + userService);
-		
-		// db 해당 vo 추출
+		// 데이터베이스에서 해당 UserVo 받아오기
 		UserVo userVo = userService.login(id, password);
 		
+		// 이메일, 패스워드가 일치하지 않는 경우
 		if(userVo == null){
-			response.sendRedirect(request.getContextPath() + "/user/loginform");
+			response.sendRedirect(request.getContextPath() + "/user/loginform?result=fail");
 			return false;
 		}
-		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@" + userVo);
-		
-		//인증
+		//인증처리
 		HttpSession session = request.getSession(true);
+		
 		session.setAttribute("authUser", userVo);
 		response.sendRedirect(request.getContextPath());
 		
 		return false;
 	}
+
 
 	
 		

@@ -100,9 +100,9 @@
 			<version>11.1.0.7.0</version>
 		</dependency>
 
-		<!-- JSTL -->
+		<!-- jstl -->
 		<dependency>
-			<groupId>jstl</groupId>
+			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>

@@ -16,14 +16,18 @@
 		<ul class="menu">
 			<li><a href="${pageContext.request.contextPath }/user/loginform">로그인</a></li>
 			<li><a href="${pageContext.request.contextPath }/user/joinform">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
 		</ul>
-		<form class="login-form" method="post" action="${pageContext.request.contextPath }">
-      		<label>아이디</label> 
-      		<input type="text" name="id" type="text" value="">
-      		<label>패스워드</label> 
-      		<input type="text" name="password" type="password" value="">
+		
+			<form class="login-form" method="post" action="${pageContext.request.contextPath }/user/login">
+	      		<label>아이디</label> 
+	      		<input type="text" name="id" type="text" value="">
+	      		<label>패스워드</label> 
+	      		<input type="text" name="password" type="password" value="">
+	      		<c:if test="${'fail' == param.result }">
+					<p>
+						로그인이 실패 했습니다.
+					</p>
+				</c:if>
       		
       		<input type="submit" value="로그인">
 		</form>

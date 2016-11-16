@@ -1,12 +1,27 @@
 package com.bit2016.jblog.vo;
 
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class UserVo {
-
 	private Long no;
-	private String id;
+	
+	
+	@NotEmpty
 	private String name;
+	
+	@NotEmpty
+	@Length(min=3, max=8)
+	private String id;
+	
+	
+	@NotEmpty
+	@Pattern(regexp="^[0-9]+$")
 	private String password;
+	
 	private String date;
 	public Long getNo() {
 		return no;

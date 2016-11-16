@@ -3,11 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-	<h1 class="logo">JBlog</h1>
-		 <c:if test="${not empty authUser }">
-	      <h2>${sessionScope.authUser.name } 님 안녕하세요</h2>
-	      </c:if>
 			<ul class="menu">
 			<c:choose>
 				<c:when test="${empty authUser }">
@@ -17,7 +12,7 @@
 				
 				<c:otherwise>	
 					<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath }">내블로그</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/main/${no}">내블로그</a></li>
 				</c:otherwise>	
 			</c:choose>		
 			</ul>

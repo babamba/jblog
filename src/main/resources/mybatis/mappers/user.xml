@@ -4,16 +4,29 @@
 <mapper namespace="user">
 
 	<insert id="insert" parameterType="uservo">
+	<selectKey keyProperty="no" resultType="long" order="BEFORE">
+		select users_seq.nextval from dual
+	</selectKey>
 		<![CDATA[
 		insert 
 		into users 
-		values( users_seq.nextval, #{id}, #{name}, #{password}, sysdate)
+		values( #{no}, #{id}, #{name}, #{password}, sysdate)
 		]]>
 	</insert>
 		
 	<select id="getByIdAndPassword" parameterType="map" resultType="uservo">
 		<![CDATA[
-			select no, name from users where id = #{id} and password= #{password}
+			select no, id, name, to_char(join_date,'yyyy-mm-dd hh:mi:ss') as joinDate from users where id = #{id} and password= #{password}
 		]]>
 	</select>
+	
+	<select id="getById"
+			parameterType="string"
+			resultType="uservo">
+		<![CDATA[
+			select no, id, name from users where id= #{value }
+		]]>
+	</select>
+	
+	
 </mapper>

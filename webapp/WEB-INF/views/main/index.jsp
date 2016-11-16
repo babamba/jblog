@@ -11,6 +11,11 @@
 </head>
 <body>
 	<div class="center-content">
+	<h1 class="logo">JBlog</h1>
+	  <c:if test="${not empty authUser }">
+	      <strong>${authUser.name} 님 안녕하세요</strong>
+	  </c:if>
+	
 	<c:import url = "/WEB-INF/views/includes/navigation.jsp"/>
 	<c:import url = "/WEB-INF/views/includes/searchbar.jsp"/>
 	</div>

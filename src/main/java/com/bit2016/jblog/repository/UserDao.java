@@ -23,8 +23,9 @@ public class UserDao {
 		private DataSource dataSource;
 
 		//회원가입
-		public void insert(UserVo vo){
+		public Long insert(UserVo vo){
 			sqlSession.insert("user.insert", vo);
+			return vo.getNo();
 		}
 		
 		public UserVo get(String id, String password){
@@ -34,6 +35,11 @@ public class UserDao {
 			map.put("password", password);
 			
 			return sqlSession.selectOne("user.getByIdAndPassword",map);
+		}
+		
+		
+		public UserVo get(String id){
+			return sqlSession.selectOne("user.getById", id);
 		}
 		
 		
