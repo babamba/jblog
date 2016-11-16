@@ -24,7 +24,7 @@
 			parameterType="string"
 			resultType="uservo">
 		<![CDATA[
-			select no, id, name from users where id= #{value }
+			select no, id, name from users where id= #{id }
 		]]>
 	</select>
 	
