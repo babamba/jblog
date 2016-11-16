@@ -1,6 +1,5 @@
 package com.bit2016.jblog.controller;
 
-import java.util.List;
 
 import javax.validation.Valid;
 

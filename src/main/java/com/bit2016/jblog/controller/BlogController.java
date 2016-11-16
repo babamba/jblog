@@ -11,9 +11,9 @@ import com.bit2016.jblog.vo.UserVo;
 @RequestMapping("/blog")
 public class BlogController {
 	
-	@RequestMapping("/main/{no}")
-	public String index(@PathVariable("no")UserVo no, Model model){
-		model.addAttribute("no", no);
+	@RequestMapping("/{id}")
+	public String index(@PathVariable(value="id")String id){
+		System.out.println("@@@id  " + id);
 		return "blog/blog-main";
 	}
 	
