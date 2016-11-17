@@ -46,6 +46,11 @@ public class UserService {
 		return userDao.get(id, password);
 	}
 	
+	public UserVo getId(String id){
+		
+		return userDao.getById(id);
+	}
+	
 	public UserVo getNo(Long no){
 		UserVo authUser = userDao.getNo(no);
 		return authUser;

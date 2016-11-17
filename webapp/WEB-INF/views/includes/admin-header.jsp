@@ -6,7 +6,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-			<h1>${blogVo.title}블로그</h1>
+			<h1>${authUser.id}블로그</h1>
 			<ul>
 			<c:choose>
 				<c:when test="${empty authUser }">

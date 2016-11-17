@@ -28,4 +28,6 @@ public class BlogDao {
 		return sqlSession.selectOne("getBlogNo", no);
 	}
 	
+	
+	
 }

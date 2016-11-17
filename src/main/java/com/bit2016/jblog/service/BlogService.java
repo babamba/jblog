@@ -73,5 +73,9 @@ public class BlogService {
 		System.out.println("이름변경");
 		return fileName;
 	}
+	
+	public BlogVo getBlogNo(Long no){
+		return blogDao.getNo(no);
+	}
 
 }

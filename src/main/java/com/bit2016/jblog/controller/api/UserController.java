@@ -1,4 +1,4 @@
-package com.bit2016.mysite.controller.api;
+package com.bit2016.jblog.controller.api;
 
 import java.util.Calendar;
 import java.util.HashMap;

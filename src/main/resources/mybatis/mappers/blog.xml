@@ -20,4 +20,5 @@
 	<select id="getBlogNo" parameterType="long" resultType="blogvo">
 		select * from BLOGs where no = #{no}
 	</select>
+	
 </mapper>
