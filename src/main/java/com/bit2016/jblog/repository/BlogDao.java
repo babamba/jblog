@@ -25,9 +25,12 @@ public class BlogDao {
 	}
 	
 	public BlogVo getNo(Long no){
-		return sqlSession.selectOne("getBlogNo", no);
+		return sqlSession.selectOne("blog.getBlogNo", no);
 	}
 	
+	public BlogVo getBlogData(String id){
+		return sqlSession.selectOne("blog.getblogvobyid", id);
+	}
 	
 	
 }

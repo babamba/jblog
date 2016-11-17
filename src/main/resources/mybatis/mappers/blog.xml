@@ -17,8 +17,15 @@
 		    ]]>	 
 	</update>
 	
-	<select id="getBlogNo" parameterType="long" resultType="blogvo">
+	<select id="getblogno" parameterType="long" resultType="blogvo">
 		select * from BLOGs where no = #{no}
+	</select>
+	
+	<select id="getblogvobyid" parameterType="String" resultType="blogvo">
+	<![CDATA[
+		select a.no, a.title, a.logo from blogs a, users b 
+		where a.no = b.no and b.id = #{id}
+	]]>
 	</select>
 	
 </mapper>

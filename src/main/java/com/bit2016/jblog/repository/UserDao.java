@@ -38,15 +38,14 @@ public class UserDao {
 		}
 		
 		public UserVo getNo(Long no){
-			return sqlSession.selectOne("user.getNo", no);
+			UserVo authUser = sqlSession.selectOne("user.getNo", no);
+			return authUser;
 			 
 		}
 		
 		public UserVo getById(String id){
 			return sqlSession.selectOne("user.getById", id);
 		}
-		
-		
 		
 		public UserVo idCheck(String id){
 			UserVo authUser = sqlSession.selectOne("user.getIdCheck", id);

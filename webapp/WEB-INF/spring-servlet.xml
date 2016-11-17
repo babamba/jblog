@@ -39,7 +39,7 @@
 	</mvc:annotation-driven>
 
 	<!-- the mvc resources tag does the magic -->
-	<mvc:resources mapping="/assets/logo/**" location="file:/upload/" />
+	<mvc:resources mapping="/blog/logo/asset/**" location="file:/upload/" />
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 햔들러 -->
 	<mvc:default-servlet-handler />

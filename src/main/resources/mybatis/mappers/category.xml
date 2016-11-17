@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="category" >
-	<insert id="categoryinsert" parameterType="categoryvo" >
-	<![CDATA[
-	insert 
-	into categories
-	values( categories_seq.nextval, #{name }, #{description }, sysdate, #{users_no} )
-	]]>
+<mapper namespace="category">
+	<insert id="insert" parameterType="categoryvo">
+		<selectKey keyProperty="no" resultType="long" order="BEFORE">
+			<![CDATA[	
+			select
+				categories_SEQ.nextval
+			from dual
+			   	]]>
+		</selectKey>	
+		<![CDATA[
+			insert INTO 
+			categories VALUES(#{no}, #{userS_No}, #{name}, #{description}, sysdate)
+		]]>
 	</insert>
+	
+		<select id="getcategoryno" parameterType="long" resultType="categoryvo">
+		<![CDATA[
+			SELECT no, users_no AS userNo, name, description, reg_date AS regDate
+ 	  		FROM CATEGORIES WHERE  no = #{no}
+		]]>
+		</select>
 </mapper>

@@ -11,44 +11,42 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit2016.jblog.repository.BlogDao;
 import com.bit2016.jblog.vo.BlogVo;
 import com.bit2016.jblog.vo.UserVo;
-import com.bit2016.mysite.exception.GalleryUploadException;
 
 @Service
 public class BlogService {
 
 	private static final String SAVE_PATH = "/upload";
-
+	
 	@Autowired
 	private BlogDao blogDao;
 
 	public void restore(BlogVo blogVo, MultipartFile multipartFile, UserVo userVo){
-		String saveFileName = "";
-		
-		if(multipartFile.isEmpty() == true){
-			return;
-		}
-		
-		try {
-			String orgFileName = multipartFile.getOriginalFilename();
-			String fileExtName = orgFileName.substring(
-					orgFileName.lastIndexOf('.') + 1, orgFileName.length());
-			saveFileName = generateSaveFileName(fileExtName);
-				writeFile(multipartFile, saveFileName);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			// DB에 저장
-			System.out.println(saveFileName);
-			blogVo.setNo(userVo.getNo());
-			blogVo.setLogo(saveFileName);
-			System.out.println(blogVo);
-			blogDao.update(blogVo);
-			System.out.println("updateblogVo");
-			
-
-	}
-
+		 		String saveFileName = "";
+		 		
+		 		try {
+			 		if(multipartFile.isEmpty() == true){
+			 			return;
+			 		}
+		 			String orgFileName = multipartFile.getOriginalFilename();
+		 			String fileExtName = orgFileName.substring(
+		 					orgFileName.lastIndexOf('.') + 1, orgFileName.length());
+		 			saveFileName = generateSaveFileName(fileExtName);
+		 				writeFile(multipartFile, saveFileName);
+		 				
+		 			// DB에 저장
+			 			System.out.println(saveFileName);
+			 			blogVo.setNo(userVo.getNo());
+			 			blogVo.setLogo(saveFileName);
+			 			System.out.println(blogVo);
+			 			System.out.println("updateblogVo");
+			 			blogDao.update(blogVo);
+			 			
+		 			} catch (IOException e) {
+		 				e.printStackTrace();
+		 			}
+		 	}
+	
+	
 	private void writeFile(MultipartFile multipartFile, String saveFileName)
 			throws IOException {
 		byte[] fileData = multipartFile.getBytes();
@@ -74,8 +72,8 @@ public class BlogService {
 		return fileName;
 	}
 	
-	public BlogVo getBlogNo(Long no){
-		return blogDao.getNo(no);
+	public BlogVo getBlogData(String id){
+		return blogDao.getBlogData(id);
 	}
-
+	
 }

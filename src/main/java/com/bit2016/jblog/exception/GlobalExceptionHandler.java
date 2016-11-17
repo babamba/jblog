@@ -1,4 +1,4 @@
-package com.bit2016.mysite.exception;
+package com.bit2016.jblog.exception;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

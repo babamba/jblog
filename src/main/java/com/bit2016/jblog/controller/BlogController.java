@@ -18,25 +18,22 @@ import com.bit2016.security.Auth;
 import com.bit2016.security.AuthUser;
 
 @Controller
-@RequestMapping("/{id}")
 public class BlogController {
 	
 	@Autowired
 	private BlogService blogService;
 	
-	@Autowired
-	private UserService userService;
-	
-	@RequestMapping("")
-	public String index(Model model,@ModelAttribute BlogVo blogVo, @PathVariable(value="id") String id){
+	@RequestMapping("{id}")
+	public String index(@ModelAttribute BlogVo blogVo, @PathVariable(value="id") String id, Model model){
+		BlogVo vo = blogService.getBlogData(id);
+		model.addAttribute("id", id);
+		model.addAttribute("blogVo", vo);
+		/*model.addAttribute("blogVo", blogService.getBlogNo(userService.getId(id).getNo()));	*/
 		
-	
-		model.addAttribute("blogVo", blogService.getBlogNo(userService.getId(id).getNo()));	
-		System.out.println(blogVo);
 		return "blog/blog-main";
 	}
 	
-	@RequestMapping("/admin/basic")
+	@RequestMapping("{id}/admin/basic")
 	public String adminform(@PathVariable(value="id")String id){
 		return "blog/blog-admin-basic";
 	}
@@ -46,20 +43,19 @@ public class BlogController {
 		return "blog/blog-admin-category";
 	}
 	
-	@RequestMapping("/admin/write")
+	@RequestMapping("{id}/admin/write")
 	public String postform(@PathVariable(value="id")String id){
 		return "blog/blog-admin-write";
 	}
 	
 	@Auth
-	@RequestMapping(value="/basicupdate", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/basicupdate", method=RequestMethod.POST)
 	public String basicUpdate(
-			@AuthUser UserVo userVo,
-			@ModelAttribute BlogVo blogVo,
-			@RequestParam("logo-file")MultipartFile multipartFile,
-			@PathVariable(value="id")String id
+			@PathVariable(value="id") String id, @AuthUser UserVo authUser, @ModelAttribute BlogVo blogVo,
+			@RequestParam("logo-file") MultipartFile multipartFile
 			){
-		blogService.restore(blogVo, multipartFile, userVo);
+		System.out.println(authUser);
+		blogService.restore(blogVo, multipartFile, authUser);
 		System.out.println("controller"+ blogVo);
 		
 		return "redirect:/" + id;

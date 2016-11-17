@@ -14,8 +14,13 @@ public class CategoryDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public void insert(CategoryVo categoryVo){
-		sqlSession.insert("category.categoryinsert", categoryVo);
+	public Long insert(CategoryVo categoryVo){
+		sqlSession.insert("category.insert", categoryVo);
+		return categoryVo.getNo();
+	}
+	
+	public CategoryVo getNo(Long no){
+		return sqlSession.selectOne("category,getcategoryno", no);
 	}
 	
 	

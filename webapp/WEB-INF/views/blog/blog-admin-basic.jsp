@@ -17,7 +17,7 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<c:import url ="/WEB-INF/views/includes/admin-navigation.jsp"/>
-				<form action="${pageContext.request.contextPath}/basicupdate" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath}/admin/basicupdate" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
@@ -25,7 +25,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/logo/assets/${blogVo.logo}"/></td>      			
+			      			<td><img src="${pageContext.request.contextPath}/blog/logo/asset/${blogVo.logo}"/></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
