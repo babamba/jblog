@@ -28,6 +28,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		
 		// 데이터베이스에서 해당 UserVo 받아오기
 		UserVo userVo = userService.login(id, password);
+		System.out.println(userVo);
 		
 		// 이메일, 패스워드가 일치하지 않는 경우
 		if(userVo == null){
@@ -38,6 +39,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession(true);
 		
 		session.setAttribute("authUser", userVo);
+		System.out.println(userVo);
 		response.sendRedirect(request.getContextPath());
 		
 		return false;

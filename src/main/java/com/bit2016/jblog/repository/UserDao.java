@@ -37,9 +37,15 @@ public class UserDao {
 			return sqlSession.selectOne("user.getByIdAndPassword",map);
 		}
 		
+		public UserVo getNo(Long no){
+			UserVo authUser = sqlSession.selectOne("user.getNo", no);
+			return authUser;
+		}
 		
-		public UserVo get(String id){
-			return sqlSession.selectOne("user.getById", id);
+		
+		public UserVo idCheck(String id){
+			UserVo authUser = sqlSession.selectOne("user.getIdCheck", id);
+			return authUser;
 		}
 		
 		

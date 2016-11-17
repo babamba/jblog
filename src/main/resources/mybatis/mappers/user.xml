@@ -28,5 +28,13 @@
 		]]>
 	</select>
 	
+	<select id="getNo"
+			parameterType="string"
+			resultType="uservo">
+		<![CDATA[
+			select no from users where id= #{id }
+		]]>
+	</select>
+	
 	
 </mapper>

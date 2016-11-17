@@ -33,27 +33,29 @@ public class UserService {
 		
 		blogVo.setNo(userNo);
 		blogVo.setTitle(userVo.getId() + "님의 블로그");
-		blogVo.setLogo("LOGO");
+		blogVo.setLogo("spring-logo.jpg");
 		
-		CategoryVo categoryVo = new CategoryVo();
-		
+	/*	CategoryVo categoryVo = new CategoryVo();
 		categoryVo.setNo(userNo);
-		
-		
-		
+		categoryDao.insert(categoryVo);*/
 		
 		blogDao.insert(blogVo);
-		categoryDao.insert(categoryVo);
 	}
 	
 	public UserVo login(String id, String password){
 		return userDao.get(id, password);
 	}
 	
+	public UserVo getNo(Long no){
+		UserVo authUser = userDao.getNo(no);
+		return authUser;
+	}
 
-	
 	public boolean idExists(String id){
-		return userDao.get(id) != null;
+		 if(userDao.idCheck(id) != null){
+			 return true;
+		 }
+		return false;
 	}
 	
 	

@@ -9,4 +9,15 @@
 	values( #{no }, #{title }, #{logo } )
 	]]>
 	</insert>
+	
+	<update id="blogupdate" parameterType="blogvo">
+	<![CDATA[
+		   	update blogs set title = #{title }, logo = #{logo } 
+		    where no= #{no} 		
+		    ]]>	 
+	</update>
+	
+	<select id="getBlogNo" parameterType="long" resultType="blogvo">
+		select * from BLOGs where no = #{no}
+	</select>
 </mapper>

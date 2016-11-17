@@ -15,9 +15,17 @@ public class BlogDao {
 	
 	public void insert(BlogVo blogVo){
 		sqlSession.insert("blog.bloginsert", blogVo);
+		System.out.println("insert :" + blogVo);
 
 	}
 	
+	public void update(BlogVo blogVo){
+		sqlSession.update("blog.blogupdate", blogVo);
+		System.out.println("update : " + blogVo);
+	}
 	
+	public BlogVo getNo(Long no){
+		return sqlSession.selectOne("getBlogNo", no);
+	}
 	
 }

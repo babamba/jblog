@@ -6,7 +6,7 @@
 	<![CDATA[
 	insert 
 	into categories
-	values( #{no }, #{name }, #{description }, sysdate, #{users_no} )
+	values( categories_seq.nextval, #{name }, #{description }, sysdate, #{users_no} )
 	]]>
 	</insert>
 </mapper>
