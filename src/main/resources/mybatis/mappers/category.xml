@@ -24,21 +24,23 @@
 		]]>
 		</select>
 		
-			<select id="selectAll" parameterType="long" resultType="categoryvo">
+		<select id="getList" parameterType="long" resultType="categoryvo">
 		<![CDATA[
-		SELECT c.no,
-      		   c.user_no AS userNo,
-     		   c.name,
-       		   c.description,
-               c.reg_date AS regDate,
-	           p.num
- 	  		FROM CATEGORY c,
-      			 (  SELECT CATEGORY_NO, COUNT (*) as num
-           		   		 FROM POST
-        			GROUP BY CATEGORY_NO) p
- 		WHERE p.CATEGORY_NO (+)= c.no
- 		   	  AND c.USER_NO = #{no}
- 		   	  
+			SELECT c.category_no AS categoryNo, 
+			   c.users_no AS usersNo,
+			   c.category_name AS categoryName, 
+			   c.description AS description,
+			   c.reg_date AS regDate, 
+			   p.num AS postCount
+		 	  	FROM CATEGORY c,
+				     (SELECT CATEGORY_NO, 
+					 		 COUNT (*) as num
+		           		   		 FROM POSTS
+		        	  GROUP BY CATEGORY_NO) p
+		 WHERE p.CATEGORY_NO (+)= c.category_no
+		 		 AND c.USERS_NO = #{userNo }
 		]]>
 		</select>
+		
+		
 </mapper>

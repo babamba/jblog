@@ -1,9 +1,10 @@
 package com.bit2016.jblog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bit2016.jblog.controller.CategoryController;
 import com.bit2016.jblog.repository.CategoryDao;
 import com.bit2016.jblog.vo.CategoryVo;
 
@@ -21,4 +22,9 @@ public class CategoryService {
 		CategoryVo categoryVo = categoryDao.getNo(no);
 		return categoryVo;
 	}
+	
+	public List<CategoryVo> getList(Long no){
+		return categoryDao.getList(no);
+	}
+	
 }

@@ -38,11 +38,6 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}
 	
-	@RequestMapping("/{id}/admin/category")
-	public String categoryform(@PathVariable(value="id")String id){
-		return "blog/blog-admin-category";
-	}
-	
 	@RequestMapping("{id}/admin/write")
 	public String postform(@PathVariable(value="id")String id){
 		return "blog/blog-admin-write";

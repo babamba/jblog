@@ -7,8 +7,16 @@ public class CategoryVo {
 	private String description;
 	private String regDate;
 	private Long usersNo;
+	private Long postCount;
 	
 
+   
+	public Long getPostCount() {
+		return postCount;
+	}
+	public void setPostCount(Long postCount) {
+		this.postCount = postCount;
+	}
 	public Long getCategoryNo() {
 		return categoryNo;
 	}
@@ -47,7 +55,8 @@ public class CategoryVo {
 	public String toString() {
 		return "CategoryVo [categoryNo=" + categoryNo + ", categoryName="
 				+ categoryName + ", description=" + description + ", regDate="
-				+ regDate + ", usersNo=" + usersNo + "]";
+				+ regDate + ", usersNo=" + usersNo + ", postCount=" + postCount
+				+ "]";
 	}
 	
 	
