@@ -1,6 +1,7 @@
 insert INTO categories values (categories_seq.nextval, '카테고리', '내용 설명', sysdate, 21);
 
-select * from categories;
+select * from category;
+
 
 select * from users;
 

@@ -38,7 +38,7 @@ public class BlogController {
 		return "blog/blog-admin-basic";
 	}
 	
-	@RequestMapping("/admin/category")
+	@RequestMapping("/{id}/admin/category")
 	public String categoryform(@PathVariable(value="id")String id){
 		return "blog/blog-admin-category";
 	}

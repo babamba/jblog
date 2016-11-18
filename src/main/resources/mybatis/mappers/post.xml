@@ -6,12 +6,7 @@
 	<![CDATA[
 	insert 
 	into posts
-		values(
-	 		posts_seq.nextval, 
-					 #{content}, 
-					 #{users_no }, 
-					 sysdate, 
-					 #{title} )
+		values(posts_seq.nextval, #{content}, #{category_no }, sysdate, #{title} )
 	]]>
 	</insert>
 	

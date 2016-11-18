@@ -15,12 +15,14 @@ public class CategoryDao {
 	private SqlSession sqlSession;
 	
 	public Long insert(CategoryVo categoryVo){
+		System.out.println("cate insert");
 		sqlSession.insert("category.insert", categoryVo);
-		return categoryVo.getNo();
+		return categoryVo.getCategoryNo();
 	}
 	
 	public CategoryVo getNo(Long no){
-		return sqlSession.selectOne("category,getcategoryno", no);
+		System.out.println("cate getNO");
+		return sqlSession.selectOne("category.getcategoryno", no);
 	}
 	
 	

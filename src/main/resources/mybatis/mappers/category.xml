@@ -3,23 +3,42 @@
 
 <mapper namespace="category">
 	<insert id="insert" parameterType="categoryvo">
-		<selectKey keyProperty="no" resultType="long" order="BEFORE">
+		<selectKey keyProperty="categoryNo" resultType="long" order="BEFORE">
 			<![CDATA[	
-			select
-				categories_SEQ.nextval
-			from dual
+			select category_seq.nextval from dual
 			   	]]>
 		</selectKey>	
 		<![CDATA[
 			insert INTO 
-			categories VALUES(#{no}, #{userS_No}, #{name}, #{description}, sysdate)
+			category VALUES( #{categoryNo}, #{categoryName}, #{description}, sysdate, #{usersNo} )
 		]]>
 	</insert>
 	
+	<!-- key Property는 쿼리문과 동일하게 써주자 복붙추천  -->
+	<!-- 쿼리문 쓸때는 데이터베이스 테이블에 있는 순서랑 똑같게   -->
+	
 		<select id="getcategoryno" parameterType="long" resultType="categoryvo">
 		<![CDATA[
-			SELECT no, users_no AS userNo, name, description, reg_date AS regDate
- 	  		FROM CATEGORIES WHERE  no = #{no}
+			SELECT category_no as categoryNo, users_no AS usersNo, category_name as categoryName, description, reg_date AS regDate
+ 	  		FROM category WHERE  category_no = #{categoryno}
+		]]>
+		</select>
+		
+			<select id="selectAll" parameterType="long" resultType="categoryvo">
+		<![CDATA[
+		SELECT c.no,
+      		   c.user_no AS userNo,
+     		   c.name,
+       		   c.description,
+               c.reg_date AS regDate,
+	           p.num
+ 	  		FROM CATEGORY c,
+      			 (  SELECT CATEGORY_NO, COUNT (*) as num
+           		   		 FROM POST
+        			GROUP BY CATEGORY_NO) p
+ 		WHERE p.CATEGORY_NO (+)= c.no
+ 		   	  AND c.USER_NO = #{no}
+ 		   	  
 		]]>
 		</select>
 </mapper>

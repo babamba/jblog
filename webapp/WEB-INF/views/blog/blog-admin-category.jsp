@@ -8,6 +8,73 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+var isEnd = false;
+
+var render = function(vo){
+						/* 파라미터 */
+	
+	var htmls = 
+		"<tr id=" + vo.no + ">" + 
+		"<td>" + vo.name + "</td>" + 
+		"<td>" + vo.count + "</td>" + 
+		"<td>" + vo.description + "</td>" +   			 
+		"</tr>";
+		
+		/*  */
+		
+		$("#table-body").prepend(htmls);
+
+}
+
+
+$(function(){
+	
+	$("#admin-cat-add").submit(function(event){
+	event.preventDefault(); /* 1. click 이벤트를 실행합니다. 2. 브라우저에게 href 에 표시된 곳으로 이동 */
+	
+	
+	
+	var name = $("#cate-title").val() /* form에 들어있는 value 들을 제어할 수 있는 함 */
+		
+	if(name == ""){
+		messageBox("카테고리 명 입력", "카테고리 명은 필수 입력사항", function(){
+			$("#cate-title").focus();
+		});
+		return;
+	}
+	var description = $("#cate-description").val() /* form에 들어있는 value 들을 제어할 수 있는 함 */
+	
+	if(description == ""){
+		messageBox("카테고리 설명 입력", "카테고리 설명은 필수 입력사항", function(){
+			$("#cate-description").focus();
+		});
+		return;
+	}
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath}/blog/api/insert",
+		type: "post",	/* get방식도 이름맞춰주면 modelAttribute로 알아서 된다. */
+		dataType:"json",
+		data: "categoryName=" + name + /* 이꼬르 안넣어서 안됬었므 */
+			  "&description=" + description,
+		success: function(responce){
+			if(response.result != "success"){
+				console.error(response.message);
+				return;
+			}
+			console.log("json")
+			render(response.data, true);
+		}
+			})
+		})
+	});
+
+
+</script>
 </head>
 <body>
 	<div id="container">
@@ -25,49 +92,44 @@
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
+		      		
+		      		<!-- 여기에 뿌려준다 널어준다 -->
+		      		<!-- tbody태그는 본문이 들어가는 행의 묶음이다. -->
+		      		<tbody id="table-body">
+		      		
+		      		</tbody>
+		      		
 					<tr>
 						<td>3</td>
 						<td>미분류</td>
 						<td>10</td>
 						<td>카테고리를 지정하지 않은 경우</td>
 						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>  
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+					</tr>  				  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
-		      	<table id="admin-cat-add">
+      		<form id="admin-cat-add" action="" method="post">
+		      	<table>
 		      		<tr>
 		      			<td class="t">카테고리명</td>
-		      			<td><input type="text" name="name"></td>
+		      			<td><input type="text" id="cate-title" name="name"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="t">설명</td>
-		      			<td><input type="text" name="desc"></td>
+		      			<td><input type="text" id="cate-description" name="description"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
 		      			<td><input type="submit" value="카테고리 추가"></td>
 		      		</tr>      		      		
 		      	</table> 
+		      </form>
 			</div>
 		</div>
 		<div id="footer">
 			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
+				<strong>${authUser.id}</strong> is powered by JBlog (c)2016
 			</p>
 		</div>
 	</div>
